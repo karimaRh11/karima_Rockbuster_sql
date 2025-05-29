@@ -1,0 +1,15 @@
+> THe best cities in revenues
+ SELECT count (customer_id)as customer_number ,C.city,D.country from customer A
+   left join address B on A.address_id=B.address_id
+left join city C on B.city_id=C.city_id
+left join country D on C.country_id=D.country_id
+where D.country in (select D.country from Customer A 
+left join address B on A.address_id=B.address_id
+left join city C on B.city_id=C.city_id
+left join country D on C.country_id=D.country_id
+group by country
+order by count (customer_id) desc
+limit 10)
+group by country , city
+order by customer_number
+limit 10
